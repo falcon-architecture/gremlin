@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>true</IsPackable>
+    <AssemblyVersion>0.0.0.1</AssemblyVersion>
+    <FileVersion>0.0.0.1</FileVersion>
+    <Version>0.0.1-alpha.1</Version>
+    <Authors>Natarajan Ganapathi</Authors>
+    <PackageDescription></PackageDescription>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageTags>falcon,contracts</PackageTags>
+    <PackageIcon>falcon.jpg</PackageIcon>
+    <!-- Enable Source Link -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <EnableSourceLink>true</EnableSourceLink>
+
+    <!-- Deterministic build -->
+    <Deterministic>true</Deterministic>
+
+    <!-- Additional compiler flags -->
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    <DebugType>embedded</DebugType>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>Falcon.CosmosDb.Gremlin</RootNamespace>
+    <AssemblyName>Falcon.CosmosDb.Gremlin</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+    <None Include="../../../resources/LICENSE.txt" Pack="true" PackagePath="\" />
+    <None Include="../../../resources/falcon.jpg" Pack="true" PackagePath="\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="ExRam.Gremlinq.Providers.CosmosDb.AspNet" Version="12.14.0" />
+  </ItemGroup>
+</Project>
