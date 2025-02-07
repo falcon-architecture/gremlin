@@ -12,4 +12,4 @@ global using ExRam.Gremlinq.Providers.CosmosDb;
 global using Falcon.CosmosDb.Gremlin;
 global using Falcon.CosmosDb.Gremlin.Configurations;
 global using Falcon.CosmosDb.Gremlin.HealthChecks;
-global using Faclon.CosmosDb.Gremlin.BinaryTree;
+global using Faclon.CosmosDb.Gremlin.Tree;

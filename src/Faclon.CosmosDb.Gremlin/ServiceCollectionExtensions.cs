@@ -10,13 +10,13 @@ public static class ServiceCollectionExtensions
         return services.AddGremlinModule();
     }
 
-    public static IServiceCollection AddInfrastructureEntityFramework(this IServiceCollection services, IConfigurationSection section)
+    public static IServiceCollection AddGremlinModule(this IServiceCollection services, IConfigurationSection section)
     {
         services.Configure<GremlinDbOptions>(section);
         return services.AddGremlinModule();
     }
 
-    public static IServiceCollection AddInfrastructureEntityFramework(this IServiceCollection services, Action<GremlinDbOptions> configure)
+    public static IServiceCollection AddGremlinModule(this IServiceCollection services, Action<GremlinDbOptions> configure)
     {
         services.Configure(configure);
         return services.AddGremlinModule();
@@ -39,13 +39,13 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    public static IApplicationBuilder UseGremlinMiddelwares(IApplicationBuilder app)
+    public static IServiceProvider UseGremlinMiddelwares(IServiceProvider serviceProvider)
     {
-        return app;
+        return serviceProvider;
     }
 
-    public static IApplicationBuilder UseGremlinModule(IApplicationBuilder app)
+    public static IServiceProvider UseGremlinModule(IServiceProvider serviceProvider)
     {
-        return app;
+        return serviceProvider;
     }
 }
