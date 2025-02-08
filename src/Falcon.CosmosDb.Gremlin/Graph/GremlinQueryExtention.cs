@@ -1,4 +1,4 @@
-namespace Gremlin.Tree;
+namespace Falcon.CosmosDb.Gremlin.Graph;
 
 public static class GremlinQueryExtention
 {
@@ -15,18 +15,8 @@ public static class GremlinQueryExtention
             .Tail(1); // Get last node
     }
 
-    public static IVertexGremlinQuery<V> GetVertex<V, E>(this IVertexGremlinQuery<V> query, V parent) where V : IVertex where E : IEdge
+    public static IVertexGremlinQuery<V> Vertex<V, E>(this IVertexGremlinQuery<V> query, V parent) where V : IVertex where E : IEdge
     {
         return query.V(parent).Out<E>().OfType<V>().Limit(1); // TODO: Test this
     }
-
-    // public static IEdgeGremlinQuery<Left, V, V> AddLeftChild<V>(this IVertexGremlinQuery<V> query, V child) where V : IVertex
-    // {
-    //     return query.AddE<Left>().To(__ => __.AddV(child));
-    // }
-
-    // public static IEdgeGremlinQuery<Right, V, V> AddRightChild<V>(this IVertexGremlinQuery<V> query, V child) where V : IVertex
-    // {
-    //     return query.AddE<Right>().To(__ => __.AddV(child));
-    // }
 }

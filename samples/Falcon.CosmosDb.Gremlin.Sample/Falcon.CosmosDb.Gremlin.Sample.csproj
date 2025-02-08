@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ExRam.Gremlinq.Providers.CosmosDb.AspNet" Version="12.14.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="9.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.3" />
+    <PackageReference Include="Gremlin.Net" Version="3.7.3" />
+    <PackageReference Include="ExRam.Gremlinq.Providers.CosmosDb" Version="12.14.0" />
+    <PackageReference Include="ExRam.Gremlinq.Support.NewtonsoftJson" Version="12.14.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Falcon.CosmosDb.Gremlin\Falcon.CosmosDb.Gremlin.csproj" />
+  </ItemGroup>
+</Project>

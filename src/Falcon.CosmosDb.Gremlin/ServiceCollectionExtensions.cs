@@ -24,27 +24,25 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection AddGremlinModule(this IServiceCollection services)
     {
-        services.AddHealthChecks()
-                .AddCheck<GremlinHealthChecks>(name: "gremlin", tags: ["gremlin", "readiness"]);
-
-        services.AddSingleton(provider =>
-        {
-            var options = provider.GetRequiredService<IOptions<GremlinDbOptions>>().Value;
-            return g.UseCosmosDb<IVertex, IEdge>(configurator =>
-                        configurator.At(new Uri(options.HostName), options.Database, options.GraphName)
-                                    .WithPartitionKey(x => x.PartitionKey)
-                                    .AuthenticateBy(options.PrimaryKey));
-        });
-        services.AddScoped<IGremlinClient, GremlinClient>();
+        services.AddCosmosGremlinHealthChecks()
+                .AddSingleton(provider =>
+                {
+                    var options = provider.GetRequiredService<IOptions<GremlinDbOptions>>().Value;
+                    return g.UseCosmosDb<IVertex, IEdge>(configurator =>
+                                configurator.At(new Uri(options.HostName), options.Database, options.GraphName)
+                                            .WithPartitionKey(x => x.PartitionKey)
+                                            .AuthenticateBy(options.PrimaryKey));
+                })
+                .AddScoped<IGremlinClient, GremlinClient>();
         return services;
     }
 
-    public static IServiceProvider UseGremlinMiddelwares(IServiceProvider serviceProvider)
+    public static IServiceProvider UseGremlinMiddelwares(this IServiceProvider serviceProvider)
     {
         return serviceProvider;
     }
 
-    public static IServiceProvider UseGremlinModule(IServiceProvider serviceProvider)
+    public static IServiceProvider UseGremlinModule(this IServiceProvider serviceProvider)
     {
         return serviceProvider;
     }
