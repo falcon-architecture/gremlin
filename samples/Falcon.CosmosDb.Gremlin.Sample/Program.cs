@@ -1,13 +1,16 @@
+using Falcon.CosmosDb.Gremlin.Sample.OpenApi;
+
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllers()
-    .AddNewtonsoftJson(options =>
-    {
-        options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-    });
+                .AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                });
 
-builder.Services.AddGremlinModule(builder.Configuration, "Cosmos:Gremlin");
-builder.Services.AddOpenApi();
+builder.Services.AddGremlinModule(builder.Configuration, "Cosmos:Gremlin")
+                .AddOpenApi();
+
 builder.Logging.AddSimpleConsole((options) =>
 {
     options.SingleLine = true;
@@ -15,18 +18,12 @@ builder.Logging.AddSimpleConsole((options) =>
 });
 
 var app = builder.Build();
-
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-    app.UseSwaggerUI(options =>
-    {
-        options.SwaggerEndpoint("/openapi/v1.json", "Gremline Graph Db POC");
-    });
-}
-app.MapGet("/", () => "BinaryTree API Service");
 app.UseHttpsRedirection();
+app.MapGet("/", () => "BinaryTree API Service");
+app.UseFalconOpenApi("Falcon.CosmosDb.Gremlin.Sample");
+app.UseFalconHealthChecks();
 app.Services.UseGremlinModule();
+
 
 app.MapPost("/user/list", async ([FromServices] IGremlinQuerySource g) =>
 {

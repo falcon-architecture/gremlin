@@ -31,9 +31,10 @@ public static class ServiceCollectionExtensions
                     return g.UseCosmosDb<IVertex, IEdge>(configurator =>
                                 configurator.At(new Uri(options.HostName), options.Database, options.GraphName)
                                             .WithPartitionKey(x => x.PartitionKey)
-                                            .AuthenticateBy(options.PrimaryKey));
-                })
-                .AddScoped<IGremlinClient, GremlinClient>();
+                                            .AuthenticateBy(options.PrimaryKey)
+                                            .UseNewtonsoftJson());
+                });
+                // .AddScoped<IGremlinClient, GremlinClient>();
         return services;
     }
 
