@@ -39,7 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="ExRam.Gremlinq.Providers.CosmosDb.AspNet" Version="12.14.0" />
-    <PackageReference Include="ExRam.Gremlinq.Support.NewtonsoftJson" Version="12.14.0" />
+    <PackageReference Include="ExRam.Gremlinq.Support.NewtonsoftJson.AspNet" Version="12.14.0" />
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="9.0.1" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.1" />
   </ItemGroup>

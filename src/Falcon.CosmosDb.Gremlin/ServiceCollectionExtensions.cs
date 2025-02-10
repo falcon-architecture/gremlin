@@ -1,7 +1,5 @@
 namespace Falcon.CosmosDb.Gremlin;
 
-using static ExRam.Gremlinq.Core.GremlinQuerySource;
-
 public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddGremlinModule(this IServiceCollection services, IConfiguration configuration, string configPath)
@@ -25,16 +23,31 @@ public static class ServiceCollectionExtensions
     private static IServiceCollection AddGremlinModule(this IServiceCollection services)
     {
         services.AddCosmosGremlinHealthChecks()
-                .AddSingleton(provider =>
-                {
-                    var options = provider.GetRequiredService<IOptions<GremlinDbOptions>>().Value;
-                    return g.UseCosmosDb<IVertex, IEdge>(configurator =>
-                                configurator.At(new Uri(options.HostName), options.Database, options.GraphName)
-                                            .WithPartitionKey(x => x.PartitionKey)
-                                            .AuthenticateBy(options.PrimaryKey)
-                                            .UseNewtonsoftJson());
-                });
-                // .AddScoped<IGremlinClient, GremlinClient>();
+                .AddGremlinq(setup => setup
+                    .UseCosmosDb<IVertex, IEdge>()
+                    .UseNewtonsoftJson());
+
+        // .AddGremlinq(setup => setup
+        //     .UseCosmosDb<IVertex, IEdge>()
+        //      .Configure((configurator, config) => {
+        //         return configurator
+        //         .At(new Uri(builder.Configuration["Gremlinqa:CosmosDb:Uri"]))
+        //         .OnDatabase(builder.Configuration["Gremlinqa:CosmosDb:Database"])
+        //         .OnGraph(builder.Configuration["Gremlinqa:CosmosDb:Graph"])
+        //         .WithPartitionKey(x => x.PartitionKey)
+        //         .AuthenticateBy(builder.Configuration["Gremlinqa:CosmosDb:AuthKey"]);
+        //     )
+        //     .UseNewtonsoftJson());
+        // .AddSingleton(provider =>
+        // {
+        //     var options = provider.GetRequiredService<IOptions<GremlinDbOptions>>().Value;
+        //     return g.UseCosmosDb<IVertex, IEdge>(configurator =>
+        //                 configurator.At(new Uri(options.HostName), options.Database, options.GraphName)
+        //                             .WithPartitionKey(x => x.PartitionKey)
+        //                             .AuthenticateBy(options.PrimaryKey)
+        //                             .UseNewtonsoftJson());
+        // });
+        // .AddScoped<IGremlinClient, GremlinClient>();
         return services;
     }
 
